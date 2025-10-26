@@ -40,15 +40,26 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Inicio', 'url' => ['/site/index']],
-            ['label' => 'Nosotros', 'url' => ['/site/about']],
-            ['label' => 'Contactanos', 'url' => ['/site/contact']],
-            ['label' => 'Actores', 'url' => ['/actor/index']],
+            //['label' => 'Nosotros', 'url' => ['/site/about']],
+            //['label' => 'Contactanos', 'url' => ['/site/contact']],
+            
+            [
+                'label' => 'Gestionar Peliculas',
+                'items' => [
+
+                    ['label' => 'Actores', 'url' => ['/actor/index']],
+                    ['label' => 'Directores', 'url' => ['/director/index']],
+                    ['label' => 'Generos', 'url' => ['/genero/index']],
+                    ['label' => 'Peliculas', 'url' => ['/pelicula/index']],
+                ],
+
+            ],
             Yii::$app->user->isGuest
-                ? ['label' => 'Login', 'url' => ['/site/login']]
+                ? ['label' => 'Iniciar sesion', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        'Cerrar sesion (' . Yii::$app->user->identity->username . ')',
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
@@ -72,7 +83,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
 <footer id="footer" class="mt-auto py-3 bg-light">
     <div class="container">
         <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
+            <div class="col-md-6 text-center text-md-start">&copy; My APP <?= date('Y') ?></div>
             <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
         </div>
     </div>

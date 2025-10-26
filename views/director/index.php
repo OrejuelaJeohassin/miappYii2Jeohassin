@@ -1,24 +1,24 @@
 <?php
 
-use app\models\Actor;
+use app\models\Director;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /** @var yii\web\View $this */
-/** @var app\models\ActorSearch $searchModel */
+/** @var app\models\DirectorSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Actores');
+$this->title = Yii::t('app', 'Directores');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="actor-index">
+<div class="director-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Actor'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Crear Director'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -30,14 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'idactor',
+            'iddirector',
             'nombre',
-            'apellidos',
-            'biografia',
+            'apellido',
+            'fecha_nacimiento',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Actor $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'idactor' => $model->idactor]);
+                'urlCreator' => function ($action, Director $model, $key, $index, $column) {
+                    return Url::toRoute([$action, 'iddirector' => $model->iddirector]);
                  }
             ],
         ],
