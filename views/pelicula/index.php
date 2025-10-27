@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'value' => function($model) {
                     if($model->portada)
-                          return Html::img(Yii::getAlias('@web') . "/portadas/" . $model->portada, ['style' => 'width: 50px']);
+                          return Html::img(Yii::getAlias('@web') . "/portadas/" . $model->portada, ['style' => 'width: 80px']);
                     return null;    
                 }
             ],
