@@ -51,15 +51,24 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     ['label' => 'Directores', 'url' => ['/director/index']],
                     ['label' => 'Generos', 'url' => ['/genero/index']],
                     ['label' => 'Peliculas', 'url' => ['/pelicula/index']],
+                    Yii::$app->user->identity->role != "admin" ? "": ['label' => 'Usuarios', 'url' => ['/user/index']],
                 ],
 
             ],
+
+            
+            Yii::$app->user->isGuest ? '' : ['label' => 'Cambiar password', 'url' => ['/user/change-password']],
+
+
+
+
+
             Yii::$app->user->isGuest
                 ? ['label' => 'Iniciar sesion', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
                     . Html::beginForm(['/site/logout'])
                     . Html::submitButton(
-                        'Cerrar sesion (' . Yii::$app->user->identity->username . ')',
+                        'Cerrar sesion (' . Yii::$app->user->identity->apellido . " " . Yii::$app->user->identity->nombre . ')' . Yii::$app->user->identity->role,
                         ['class' => 'nav-link btn btn-link logout']
                     )
                     . Html::endForm()
