@@ -30,7 +30,7 @@ class DirectorController extends Controller
                         'matchCallback' => function ($rule, $action) {
                             return !Yii::$app->user->isGuest
                                 && isset(Yii::$app->user->identity->role)
-                                && Yii::$app->user->identity->role === 'user';
+                                && in_array(Yii::$app->user->identity->role, ['user', 'admin'], true);
                         },
                     ],
                 ],

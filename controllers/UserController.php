@@ -7,6 +7,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use app\models\ChangePasswordForm;
+use yii\filters\VerbFilter;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
                 'only' => ['index', 'view', 'create', 'update', 'delete', 'reset-password','change-password' ],
                 'rules' => [
                     [
-                        'actions' => ['reset-password'],
+                        'actions' => ['change-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -26,16 +27,16 @@ class UserController extends Controller
                     [
                         'actions' => ['index', 'view', 'create', 'update', 'delete', 'reset-password','change-password'],
                         'allow' => true,
-                        'roles' => ['admin'],
+                        'roles' => ['@'],
                         'matchCallback' => function ($rule, $action) {
-                            return Yii::$app->user->identity->role === 'admin';
+                            return !Yii::$app->user->isGuest && Yii::$app->user->identity->role === 'admin';
                         },
                     ]
 
                 ],
             ],
             'verbs' => [
-                'class' => yii\filters\VerbFilter::class,
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],
