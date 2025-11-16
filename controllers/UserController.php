@@ -18,7 +18,7 @@ class UserController extends Controller
                 'only' => ['index', 'view', 'create', 'update', 'delete', 'reset-password','change-password' ],
                 'rules' => [
                     [
-                        'actions' => ['view','update', 'reset-password'],
+                        'actions' => ['reset-password'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
