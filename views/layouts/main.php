@@ -44,6 +44,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             //['label' => 'Contactanos', 'url' => ['/site/contact']],
             
             [
+
                 'label' => 'Gestionar Peliculas',
                 'items' => [
 
@@ -53,6 +54,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
                     ['label' => 'Peliculas', 'url' => ['/pelicula/index']],
                     ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role != "admin") ? "": ['label' => 'Usuarios', 'url' => ['/user/index']],
                 ],
+                // Mostrar a usuarios autenticados
+                'visible' => !Yii::$app->user->isGuest,
 
             ],
 
