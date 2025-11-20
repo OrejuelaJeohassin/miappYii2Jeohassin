@@ -1,53 +1,51 @@
 <?php
 
 /** @var yii\web\View $this */
+use app\models\Pelicula;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
-$this->title = 'My Yii Application';
+$this->title = 'Películas';
+$this->registerCssFile('@web/css/netflix.css', ['depends' => \app\assets\AppAsset::class]);
+
+$peliculas = Pelicula::find()->orderBy(['anio' => SORT_DESC])->all();
+$featured = $peliculas[0] ?? null;
 ?>
-<div class="site-index">
+<div class="site-netflix">
 
-    <div class="jumbotron text-center bg-transparent mt-5 mb-5">
-        <h1 class="display-4">Bienvenidos!</h1>
+    <?php if ($featured): ?>
+        <section class="site-netflix-hero">
+            <div class="hero-content container">
+                <?php if ($featured->portada): ?>
+                    <img class="hero-poster" src="<?= Url::to('@web/portadas/' . $featured->portada) ?>" alt="<?= Html::encode($featured->titulo) ?>">
+                <?php else: ?>
+                    <div class="hero-poster placeholder">No imagen</div>
+                <?php endif; ?>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="https://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
-    <div class="body-content">
-
-        <div class="row">
-            <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+                <div class="hero-meta">
+                    <h1><?= Html::encode($featured->titulo) ?></h1>
+                    <p class="text-muted"><?= Html::encode($featured->sinopsis) ?></p>
+                    <p><a class="btn btn-danger" href="<?= Url::to(['pelicula/view', 'idpelicula' => $featured->idpelicula]) ?>">Ver detalles</a></p>
+                </div>
             </div>
-            <div class="col-lg-4 mb-3">
-                <h2>Heading</h2>
+        </section>
+    <?php endif; ?>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
-            </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-outline-secondary" href="https://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
-            </div>
+    <div class="container">
+        <h2 class="section-title">Últimas películas</h2>
+        <div class="row-rail">
+            <?php foreach ($peliculas as $p): ?>
+                <div class="card" onclick="location.href='<?= Url::to(['pelicula/view', 'idpelicula' => $p->idpelicula]) ?>'">
+                    <?php if ($p->portada): ?>
+                        <img class="poster" src="<?= Url::to('@web/portadas/' . $p->portada) ?>" alt="<?= Html::encode($p->titulo) ?>">
+                    <?php else: ?>
+                        <div class="placeholder"></div>
+                    <?php endif; ?>
+                    <div class="title"><?= Html::encode($p->titulo) ?></div>
+                    <div class="year"><?= Html::encode($p->anio) ?></div>
+                </div>
+            <?php endforeach; ?>
         </div>
-
     </div>
+
 </div>

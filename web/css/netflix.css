@@ -1,0 +1,22 @@
+/* Estilos simples inspirados en Netflix */
+body { background-color: #141414; color: #e9e9e9; }
+.site-netflix-hero { position: relative; padding: 60px 40px; background: linear-gradient(90deg, rgba(20,20,20,0.9) 20%, rgba(20,20,20,0.5) 60%), #141414; margin-bottom: 30px; }
+.site-netflix-hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20,20,20,0.6) 0%, rgba(20,20,20,0.15) 40%, rgba(20,20,20,0.6) 100%); z-index:1; pointer-events:none; border-radius:6px; }
+.hero-content { display:flex; gap:30px; align-items: center; position:relative; z-index:2; }
+.hero-poster { width: 320px; height: 180px; object-fit: cover; border-radius: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); }
+.hero-meta h1 { font-size: 40px; margin:0 0 10px; color: #ffffff; }
+.hero-meta p { color: #d9d9d9; max-width: 60ch; line-height:1.6; font-size:16px; opacity:0.98; }
+
+
+.site-netflix .text-muted { color: #d1d1d1 !important; opacity: 1 !important; }
+.section-title { font-size: 18px; margin: 10px 20px; color: #ffffff; }
+.row-rail { overflow-x: auto; padding: 10px 20px 30px; white-space: nowrap; }
+.card { display: inline-block; width: 200px; margin-right: 12px; vertical-align: top; cursor: pointer; background: rgba(20,20,20,0.6); padding:8px; border-radius:6px; }
+.card .poster { width: 100%; height: 112px; object-fit: cover; border-radius: 4px; transition: transform .25s ease, box-shadow .25s ease; }
+.card .title { font-size: 14px; margin-top: 8px; color: #ffffff; font-weight:600; }
+.card .year { font-size: 12px; color: #cfcfcf; }
+.card:hover .poster { transform: scale(1.08); box-shadow: 0 20px 40px rgba(0,0,0,0.7); }
+.row-rail::-webkit-scrollbar { height: 10px; }
+.row-rail::-webkit-scrollbar-thumb { background: #333; border-radius: 6px; }
+.placeholder { background: #222; display:flex; align-items:center; justify-content:center; color:#bfbfbf; height:112px; border-radius:4px; }
+@media (max-width:768px){ .hero-content{flex-direction:column; align-items:flex-start;} .hero-poster{width:100%; height:auto;} }
